@@ -1,4 +1,173 @@
 <div class="dashboard-container">
-    <h1>Dashboard</h1>
-    <p>{{ summary }} <a [href]="sourceUrl" target="_blank" rel="noopener">Source</a></p>
+  <div class="dashboard-header">
+    <h1>EV Clean Energy Dashboard</h1>
+    <p class="subtitle">Real-time analytics for your electric vehicle's clean energy performance</p>
   </div>
+  
+  <div class="metrics-section">
+    <h2>Key Metrics</h2>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>🔋</i>
+        </div>
+        <div class="metric-content">
+          <h3>Battery Health</h3>
+          <p class="metric-value">92%</p>
+          <p class="metric-trend positive">↑ 2% from last month</p>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>⚡</i>
+        </div>
+        <div class="metric-content">
+          <h3>Energy Efficiency</h3>
+          <p class="metric-value">4.2 mi/kWh</p>
+          <p class="metric-trend positive">↑ 0.3 from last month</p>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>🌿</i>
+        </div>
+        <div class="metric-content">
+          <h3>CO₂ Avoided</h3>
+          <p class="metric-value">1,240 kg</p>
+          <p class="metric-trend positive">↑ 120 kg from last month</p>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>💰</i>
+        </div>
+        <div class="metric-content">
+          <h3>Cost Savings</h3>
+          <p class="metric-value">$345</p>
+          <p class="metric-trend positive">↑ $42 from last month</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Charts Section -->
+  <div class="charts-section">
+    <h2>Performance Analytics</h2>
+    
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Battery Capacity Over Time</h3>
+        <app-chart chartKey="cycle-life"></app-chart>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Charging Time by Battery Level</h3>
+        <app-chart chartKey="charging-time"></app-chart>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Daily Energy Usage</h3>
+        <app-chart chartKey="energy-usage"></app-chart>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Energy Efficiency by Driving Condition</h3>
+        <app-chart chartKey="efficiency"></app-chart>
+      </div>
+    </div>
+  </div>
+  
+  <div class="energy-section">
+    <h2>Energy Sources & Distribution</h2>
+    
+    <div class="energy-grid">
+      <div class="energy-card wide-card">
+        <h3>Clean Energy Distribution</h3>
+        <app-chart chartKey="energy-distribution"></app-chart>
+      </div>
+      
+      <div class="energy-card">
+        <h3>Carbon Savings by Quarter</h3>
+        <app-chart chartKey="carbon-savings"></app-chart>
+      </div>
+      
+      <div class="energy-card">
+        <h3>Cost per Mile Comparison</h3>
+        <app-chart chartKey="cost-comparison"></app-chart>
+      </div>
+    </div>
+  </div>
+  
+  <div class="benefits-section">
+    <h2>Clean Energy Benefits</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <i>🌍</i>
+        <h3>Environmental Impact</h3>
+        <p>Your EV has prevented 1.2 tons of CO₂ emissions this year, equivalent to planting 60 trees.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <i>💸</i>
+        <h3>Financial Savings</h3>
+        <p>You've saved approximately $1,200 in fuel costs compared to a conventional vehicle.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <i>⚙️</i>
+        <h3>Maintenance Reduction</h3>
+        <p>EVs require 50% less maintenance than conventional vehicles, saving you time and money.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <i>🔄</i>
+        <h3>Energy Independence</h3>
+        <p>Your clean energy sources provide 85% of your charging needs, reducing grid dependency.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="timeline-section">
+    <h2>Clean Energy Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>EV Purchase</h3>
+          <p class="timeline-date">January 15, 2023</p>
+          <p>You joined the clean energy revolution by purchasing your electric vehicle.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Solar Installation</h3>
+          <p class="timeline-date">March 22, 2023</p>
+          <p>Installed 5kW solar system to power your home and EV with clean energy.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>1,000 Clean Miles</h3>
+          <p class="timeline-date">May 10, 2023</p>
+          <p>Reached 1,000 miles powered entirely by renewable energy sources.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Battery Optimization</h3>
+          <p class="timeline-date">August 5, 2023</p>
+          <p>Implemented smart charging schedule to maximize battery longevity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

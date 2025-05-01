@@ -1,7 +1,3 @@
-<div class="chart-container" role="img" aria-label="Chart for {{chartKey}}">
-    <canvas baseChart
-      [data]="chartData"
-      [options]="chartOptions"
-      [type]="chartType">
-    </canvas>
-  </div>
+<div class="chart-container" role="img" [attr.aria-label]="'Chart for ' + chartKey">
+  <!-- D3.js will render the chart here -->
+</div>

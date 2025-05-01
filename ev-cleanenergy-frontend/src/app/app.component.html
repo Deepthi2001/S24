@@ -1,3 +1,6 @@
-<app-top-menu></app-top-menu>
- apps works hwjetwrtoi
-<router-outlet></router-outlet>
+<div class="app-content">
+  <app-top-menu *ngIf="isLoggedIn()"></app-top-menu>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

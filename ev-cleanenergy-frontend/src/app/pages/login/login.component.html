@@ -1,16 +1,57 @@
-<div class="login-container">
-    <mat-card>
-      <mat-card-title>Login</mat-card-title>
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <mat-form-field appearance="fill">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" required />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" required />
-        </mat-form-field>
-        <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">Login</button>
-      </form>
-    </mat-card>
+<div class="login-container fade-in">
+  <div class="login-content">
+    <div class="login-header">
+      <div class="logo">
+        <h1>EV Clean Energy</h1>
+      </div>
+      <p class="tagline">Powering the future of sustainable transportation</p>
+    </div>
+    
+    <div class="card login-card">
+      <div class="card-header">
+        <h2 class="card-title">Sign In</h2>
+        <p class="card-subtitle">Access your EV analytics dashboard</p>
+      </div>
+      
+      <div class="card-content">
+        <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <input type="text" id="username" formControlName="username" required />
+            </div>
+            <div class="error-message" *ngIf="form.get('username')?.hasError('required') && form.get('username')?.touched">
+              Username is required
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper password-input">
+              <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password" required />
+              <span class="icon-lock">🔒</span>
+              <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword" [attr.aria-label]="'Toggle password visibility'">
+                <span class="icon">{{hidePassword ? '👁️‍🗨️' : '👁️'}}</span>
+              </button>
+            </div>
+            <div class="error-message" *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">
+              Password is required
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" [disabled]="form.invalid" class="btn btn-primary login-button">
+              <span class="icon">➡️</span>
+              Sign In
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="card-footer login-footer">
+        <p>Demo credentials: username: <strong>Saideepthi</strong>, password: <strong>Saideepthi</strong></p>
+      </div>
+    </div>
+    
   </div>
+</div>

@@ -1,8 +1,42 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
+import { Component, inject, HostListener, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 
-@Component({ selector: 'app-top-menu', templateUrl: './top-menu.component.html' })
+@Component({
+  selector: 'app-top-menu',
+  templateUrl: './top-menu.component.html',
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive]
+})
 export class TopMenuComponent {
-  constructor(private auth: AuthService) {}
-  logout() { this.auth.logout(); }
+  private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
+  isMenuOpen = false;
+  
+  constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.onResize();
+    }
+  }
+  
+  @HostListener('window:resize')
+  onResize() {
+    if (isPlatformBrowser(this.platformId) && window.innerWidth > 768) {
+      this.isMenuOpen = false;
+    }
+  }
+  
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+  
+  logout() { 
+    this.isMenuOpen = false;
+    // Clear login state from localStorage
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('isLoggedIn');
+    }
+    // Navigate to login page
+    this.router.navigate(['/login']);
+  }
 }

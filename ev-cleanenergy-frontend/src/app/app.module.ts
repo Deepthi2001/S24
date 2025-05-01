@@ -2,16 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatToolbarModule }   from '@angular/material/toolbar';
-import { MatButtonModule }    from '@angular/material/button';
-import { MatCardModule }      from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule }     from '@angular/material/input';
-import { NgChartsModule }     from 'ng2-charts';
+// D3.js is imported directly in the chart component
 
 import { AppComponent }       from './app.component';
 import { LoginComponent }     from './pages/login/login.component';
@@ -22,7 +16,6 @@ import { TopMenuComponent }   from './shared/components/top-menu/top-menu.compon
 import { ChartComponent }     from './shared/components/chart/chart.component';
 
 import { AuthGuard }          from './core/guards/auth.guard';
-import { TokenInterceptor }   from './core/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,19 +31,11 @@ import { TokenInterceptor }   from './core/interceptors/token.interceptor';
     BrowserModule,
     RouterModule,       // required for <router-outlet> and routerLink
     AppRoutingModule,
-    HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    NgChartsModule
+    BrowserAnimationsModule
   ],
   providers: [
-    AuthGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
