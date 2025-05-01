@@ -1,5 +1,93 @@
 <div class="summary-container">
-  <h1>Charge Time Comparison</h1>
-  <app-chart [chartKey]="'charge-time'"></app-chart>
-  <p>The chart above illustrates the dramatic reduction in charging time achieved by the nano-tin composite anode: from 60 minutes to 80% SoC with standard graphite, down to just 20 minutes with the Hard-C/Sn Nano material. This improvement directly translates to more convenient EV charging and broader consumer adoption.</p>
+  <h1>Clean Energy Summary</h1>
+  
+  <div class="chart-section">
+    <h2>Energy Sources & Distribution</h2>
+    <app-chart [chartKey]="'energy-distribution'"></app-chart>
+    <p class="chart-description">This chart illustrates the distribution of clean energy sources used for EV charging in our network. Solar energy leads at 45%, followed by wind at 25%, hydroelectric at 15%, geothermal at 10%, and biomass at 5%. This diverse mix of renewable sources ensures reliability while maximizing environmental benefits. Data is collected from our network of charging stations and updated monthly.</p>
+  </div>
+  
+  <div class="chart-section">
+    <h2>Charge Time Comparison</h2>
+    <app-chart [chartKey]="'charging-time'"></app-chart>
+    <p class="chart-description">The chart above illustrates the charging time required to reach different battery levels. Using the latest nano-tin composite anode technology, EVs can reach 80% charge in just 35 minutes, compared to 60+ minutes with older battery technologies. This data is based on measurements from our fast-charging network and represents average charging times across different EV models.</p>
+  </div>
+  
+  <div class="metrics-section">
+    <h2>Key Metrics</h2>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>🔋</i>
+        </div>
+        <div class="metric-content">
+          <h3>Battery Health</h3>
+          <p class="metric-value">92%</p>
+          <p class="metric-trend positive">↑ 2% from last month</p>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>⚡</i>
+        </div>
+        <div class="metric-content">
+          <h3>Energy Efficiency</h3>
+          <p class="metric-value">4.2 mi/kWh</p>
+          <p class="metric-trend positive">↑ 0.3 from last month</p>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>🌿</i>
+        </div>
+        <div class="metric-content">
+          <h3>CO₂ Avoided</h3>
+          <p class="metric-value">1,240 kg</p>
+          <p class="metric-trend positive">↑ 120 kg from last month</p>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i>💰</i>
+        </div>
+        <div class="metric-content">
+          <h3>Cost Savings</h3>
+          <p class="metric-value">$345</p>
+          <p class="metric-trend positive">↑ $42 from last month</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="benefits-section">
+    <h2>Clean Energy Benefits</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <i>🌍</i>
+        <h3>Environmental Impact</h3>
+        <p>Your EV has prevented 1.2 tons of CO₂ emissions this year, equivalent to planting 60 trees.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <i>💸</i>
+        <h3>Financial Savings</h3>
+        <p>You've saved approximately $1,200 in fuel costs compared to a conventional vehicle.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <i>⚙️</i>
+        <h3>Maintenance Reduction</h3>
+        <p>EVs require 50% less maintenance than conventional vehicles, saving you time and money.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <i>🔄</i>
+        <h3>Energy Independence</h3>
+        <p>Your clean energy sources provide 85% of your charging needs, reducing grid dependency.</p>
+      </div>
+    </div>
+  </div>
 </div>

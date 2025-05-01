@@ -95,7 +95,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
         this.chartTitle = 'Energy Efficiency by Driving Condition';
         break;
       case 'energy-distribution':
-        this.chartTitle = 'Clean Energy Distribution';
+        this.chartTitle = '';
         break;
       case 'carbon-savings':
         this.chartTitle = 'Carbon Savings by Quarter';

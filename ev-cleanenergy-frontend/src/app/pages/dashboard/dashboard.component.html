@@ -1,134 +1,27 @@
 <div class="dashboard-container">
   <div class="dashboard-header">
     <h1>EV Clean Energy Dashboard</h1>
-    <a href="https://www.sciencedaily.com/releases/2025/04/250418112806.htm" target="_blank" rel="noopener">Source Article</a>
-    <p class="subtitle">Real-time analytics for your electric vehicle's clean energy performance</p>
+  
   </div>
   
-  <div class="metrics-section">
-    <h2>Key Metrics</h2>
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-icon">
-          <i>🔋</i>
-        </div>
-        <div class="metric-content">
-          <h3>Battery Health</h3>
-          <p class="metric-value">92%</p>
-          <p class="metric-trend positive">↑ 2% from last month</p>
-        </div>
-      </div>
+  <div class="summary-section">
+    <h2>Clean Energy and Electric Vehicles: The Future of Sustainable Transportation</h2>
+    <div class="summary-content">
+      <p>Electric vehicles (EVs) represent a transformative shift in transportation technology, offering a cleaner alternative to conventional fossil fuel-powered vehicles. Recent advancements in battery technology, particularly the development of nano-tin composite anodes, have dramatically improved EV performance metrics. These innovations have resulted in faster charging times, extended battery life, and increased energy efficiency.</p>
       
-      <div class="metric-card">
-        <div class="metric-icon">
-          <i>⚡</i>
-        </div>
-        <div class="metric-content">
-          <h3>Energy Efficiency</h3>
-          <p class="metric-value">4.2 mi/kWh</p>
-          <p class="metric-trend positive">↑ 0.3 from last month</p>
-        </div>
-      </div>
+      <p>The integration of renewable energy sources with EV charging infrastructure creates a synergistic relationship that maximizes environmental benefits. Solar, wind, and hydroelectric power generation can directly supply the electricity needed for EVs, creating a truly zero-emission transportation system. This integration reduces dependency on fossil fuels and decreases greenhouse gas emissions across the entire energy-transportation ecosystem.</p>
       
-      <div class="metric-card">
-        <div class="metric-icon">
-          <i>🌿</i>
-        </div>
-        <div class="metric-content">
-          <h3>CO₂ Avoided</h3>
-          <p class="metric-value">1,240 kg</p>
-          <p class="metric-trend positive">↑ 120 kg from last month</p>
-        </div>
-      </div>
+      <p>Studies indicate that EVs powered by renewable energy sources can reduce carbon emissions by up to 95% compared to conventional vehicles. Additionally, the decreasing costs of both renewable energy generation and EV manufacturing are making clean transportation increasingly accessible to broader segments of the population. As grid infrastructure continues to evolve with smart charging capabilities and vehicle-to-grid technologies, EVs will play a crucial role in energy storage and distribution, further enhancing the stability and efficiency of renewable energy systems.</p>
       
-      <div class="metric-card">
-        <div class="metric-icon">
-          <i>💰</i>
-        </div>
-        <div class="metric-content">
-          <h3>Cost Savings</h3>
-          <p class="metric-value">$345</p>
-          <p class="metric-trend positive">↑ $42 from last month</p>
-        </div>
-      </div>
+      <p><a href="https://www.sciencedaily.com/releases/2025/04/250418112806.htm" target="_blank" rel="noopener">Source: Science Daily (April 2025)</a></p>
     </div>
-  </div>
-  
-  <!-- Charts Section -->
-  <div class="charts-section">
-    <h2>Performance Analytics</h2>
     
-    <div class="charts-grid">
-      <div class="chart-card">
-        <h3>Battery Capacity Over Time</h3>
-        <app-chart chartKey="cycle-life"></app-chart>
-      </div>
-      
-      <div class="chart-card">
-        <h3>Charging Time by Battery Level</h3>
-        <app-chart chartKey="charging-time"></app-chart>
-      </div>
-      
-      <div class="chart-card">
-        <h3>Daily Energy Usage</h3>
-        <app-chart chartKey="energy-usage"></app-chart>
-      </div>
-      
-      <div class="chart-card">
-        <h3>Energy Efficiency by Driving Condition</h3>
-        <app-chart chartKey="efficiency"></app-chart>
-      </div>
+    <div class="tech-stack-section">
+      <h3>Technical Implementation</h3>
+      <p>This EV Clean Energy Dashboard is built using Angular 17 with standalone components for improved modularity and performance. The frontend leverages D3.js for interactive data visualization, providing dynamic charts that update asynchronously via HTTP requests to a Node.js/Express backend. Data is stored in a MongoDB database, allowing for flexible schema evolution as new EV metrics become available. The application is containerized using Docker and deployed on AWS with CI/CD pipelines through GitHub Actions, ensuring reliable and consistent delivery of new features. Authentication is handled through JSON Web Tokens (JWT) with role-based access control to protect sensitive user data.</p>
     </div>
   </div>
   
-  <div class="energy-section">
-    <h2>Energy Sources & Distribution</h2>
-    
-    <div class="energy-grid">
-      <div class="energy-card wide-card">
-        <app-chart chartKey="energy-distribution"></app-chart>
-      </div>
-      
-      <div class="energy-card">
-        <h3>Carbon Savings by Quarter</h3>
-        <app-chart chartKey="carbon-savings"></app-chart>
-      </div>
-      
-      <div class="energy-card">
-        <h3>Cost per Mile Comparison</h3>
-        <app-chart chartKey="cost-comparison"></app-chart>
-      </div>
-    </div>
-  </div>
-  
-  <div class="benefits-section">
-    <h2>Clean Energy Benefits</h2>
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <i>🌍</i>
-        <h3>Environmental Impact</h3>
-        <p>Your EV has prevented 1.2 tons of CO₂ emissions this year, equivalent to planting 60 trees.</p>
-      </div>
-      
-      <div class="benefit-card">
-        <i>💸</i>
-        <h3>Financial Savings</h3>
-        <p>You've saved approximately $1,200 in fuel costs compared to a conventional vehicle.</p>
-      </div>
-      
-      <div class="benefit-card">
-        <i>⚙️</i>
-        <h3>Maintenance Reduction</h3>
-        <p>EVs require 50% less maintenance than conventional vehicles, saving you time and money.</p>
-      </div>
-      
-      <div class="benefit-card">
-        <i>🔄</i>
-        <h3>Energy Independence</h3>
-        <p>Your clean energy sources provide 85% of your charging needs, reducing grid dependency.</p>
-      </div>
-    </div>
   
   
-  </div>
 </div>
