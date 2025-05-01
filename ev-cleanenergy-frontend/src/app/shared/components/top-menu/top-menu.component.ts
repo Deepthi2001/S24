@@ -11,7 +11,7 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 export class TopMenuComponent {
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
-  isMenuOpen = false;
+  // isMenuOpen = false;
   
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
@@ -22,16 +22,12 @@ export class TopMenuComponent {
   @HostListener('window:resize')
   onResize() {
     if (isPlatformBrowser(this.platformId) && window.innerWidth > 768) {
-      this.isMenuOpen = false;
+      // this.isMenuOpen = false;
     }
   }
   
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-  
   logout() { 
-    this.isMenuOpen = false;
+    // this.isMenuOpen = false;
     // Clear login state from localStorage
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('isLoggedIn');

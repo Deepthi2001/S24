@@ -1,33 +1,22 @@
-<header class="top-menu">
-  <div class="container top-menu-container">
-    <div class="brand">
-      <span class="brand-icon">🚗</span>
-      <span class="brand-name">EV Clean Energy</span>
-    </div>
-    
-    <span class="spacer"></span>
-    
-    <nav class="nav-links" [class.nav-open]="isMenuOpen">
-      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active-link">
-        <span class="nav-icon">📊</span>
-        <span>Dashboard</span>
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-menu">
+      <a class="navbar-item" routerLink="/dashboard" routerLinkActive="active">
+        <span class="navbar-icon">📊</span>
+        <span class="navbar-text">Dashboard</span>
       </a>
-      <a class="nav-link" routerLink="/summary" routerLinkActive="active-link">
-        <span class="nav-icon">📈</span>
-        <span>Summary</span>
+      <a class="navbar-item" routerLink="/summary" routerLinkActive="active">
+        <span class="navbar-icon">📈</span>
+        <span class="navbar-text">Summary</span>
       </a>
-      <a class="nav-link" routerLink="/reports" routerLinkActive="active-link">
-        <span class="nav-icon">📋</span>
-        <span>Reports</span>
+      <a class="navbar-item" routerLink="/reports" routerLinkActive="active">
+        <span class="navbar-icon">📋</span>
+        <span class="navbar-text">Reports</span>
       </a>
-      <button class="nav-link logout-button" (click)="logout()">
-        <span class="nav-icon">🚪</span>
-        <span>Logout</span>
+      <button class="navbar-item navbar-logout" (click)="logout()">
+        <span class="navbar-icon">🚪</span>
+        <span class="navbar-text">Logout</span>
       </button>
-    </nav>
-    
-    <button class="menu-toggle" (click)="toggleMenu()">
-      <span class="toggle-icon">{{ isMenuOpen ? '✕' : '☰' }}</span>
-    </button>
-  </div>
-</header>
+    </div>
+    </div>
+</nav>

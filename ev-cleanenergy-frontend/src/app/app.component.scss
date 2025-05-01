@@ -14,16 +14,28 @@
   flex: 1;
   padding: 0;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   box-sizing: border-box;
+  padding-top: 60px; /* Match the navbar height */
 }
 
 // Fix for login page
 :host ::ng-deep .login-container {
   min-height: 100vh;
+  padding-top: 0; /* Override padding for login page */
 }
 
 // Fix for dashboard page
 :host ::ng-deep .dashboard-container {
-  padding-top: 1rem;
+  padding: 1.5rem;
+  padding-top: 1.5rem;
   padding-bottom: 2rem;
+}
+
+// Adjust other page containers
+:host ::ng-deep .summary-container,
+:host ::ng-deep .reports-container {
+  padding: 1.5rem;
+  padding-top: 1.5rem;
 }
