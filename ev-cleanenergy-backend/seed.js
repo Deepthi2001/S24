@@ -1,19 +1,19 @@
 // seed.js
 const mongoose  = require('mongoose');
 const ChartData = require('./src/models/ChartData');
-
-const MONGO_URI = 'mongodb://localhost:27017/evCleanEnergy';
+require('dotenv').config();
+const MONGO_URI = process.env.MONGO_URI;
 
 async function seed() {
   await mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  console.log('🔌 Connected to MongoDB');
+  console.log('Connected to MongoDB');
 
   // clear out old data
   await ChartData.deleteMany({});
-  console.log('🗑  Cleared existing ChartData');
+  console.log(' Cleared existing ChartData');
 
   // All chart datasets for the application
   const charts = [
