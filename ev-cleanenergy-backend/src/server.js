@@ -23,11 +23,11 @@ mongoose.connect(MONGO_URI , {
 
 
 // serve Angular’s build output
-app.use(express.static(path.join(__dirname, '../dist/ev-cleanenergy-frontend')));
-// all other non-/api requests serve index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/ev-cleanenergy-frontend/index.html'));
-});
+// app.use(express.static(path.join(__dirname, '../dist/ev-cleanenergy-frontend')));
+// // all other non-/api requests serve index.html
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../dist/ev-cleanenergy-frontend/index.html'));
+// });
 
 // routes
 app.use('/api/auth', authRoute);
