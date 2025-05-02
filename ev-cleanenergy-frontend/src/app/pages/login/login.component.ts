@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,11 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   form: FormGroup;
   hidePassword = true;
+  errorMessage = '';
+  loading = false;
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
   
   constructor() {
     this.form = this.fb.group({
@@ -26,24 +30,21 @@ export class LoginComponent {
   submit() {
     if (this.form.valid) {
       const { username, password } = this.form.value;
+      this.loading = true;
+      this.errorMessage = '';
       
-      // Check hardcoded credentials
-      if (username === 'Saideepthi' && password === 'Saideepthi') {
-        // Store login state in localStorage
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('isLoggedIn', 'true');
+      this.authService.login(username, password).subscribe({
+        next: () => {
+          // Navigate to dashboard on successful login
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          this.loading = false;
+          this.errorMessage = error.message || 'Invalid credentials. Please use Saideepthi/Saideepthi.';
         }
-        // Navigate to dashboard
-        this.router.navigate(['/dashboard']);
-      } else {
-        // Handle invalid login
-        alert('Invalid credentials. Please use Saideepthi/Saideepthi.');
-      }
+      });
     }
   }
   
-  // Helper method to check if we're in a browser environment
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined';
-  }
+
 }

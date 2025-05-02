@@ -39,10 +39,15 @@
             </div>
           </div>
           
+          <div class="error-message api-error" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+          
           <div class="form-actions">
-            <button type="submit" [disabled]="form.invalid" class="btn btn-primary login-button">
-              <span class="icon">➡️</span>
-              Sign In
+            <button type="submit" [disabled]="form.invalid || loading" class="btn btn-primary login-button">
+              <span class="icon" *ngIf="!loading">➡️</span>
+              <span class="icon loading" *ngIf="loading">⏳</span>
+              {{ loading ? 'Signing In...' : 'Sign In' }}
             </button>
           </div>
         </form>

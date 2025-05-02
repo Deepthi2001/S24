@@ -1,10 +1,15 @@
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of, catchError } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChartService {
+  private apiUrl = 'http://localhost:3000/api/chart';
   private platformId = inject(PLATFORM_ID);
+  private http = inject(HttpClient);
+  private authService = inject(AuthService);
   
   // Mock data for different chart types
   private mockData: { [key: string]: any[] } = {
@@ -60,7 +65,20 @@ export class ChartService {
   };
   
   getData(key: string): Observable<any[]> {
-    // Return mock data based on the key
+    // Try to get data from API if user is logged in
+    if (this.authService.isLoggedIn()) {
+      // The AuthInterceptor will automatically add the JWT token to the request
+      return this.http.get<any[]>(`${this.apiUrl}/${key}`)
+        .pipe(
+          catchError(error => {
+            console.error(`Error fetching chart data for ${key}:`, error);
+            // Fallback to mock data if API call fails
+            return of(this.mockData[key] || []);
+          })
+        );
+    }
+    
+    // Fallback to mock data if not logged in
     return of(this.mockData[key] || []);
   }
 }
