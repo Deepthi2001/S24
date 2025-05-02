@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef, AfterViewInit, inject, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, SimpleChanges, OnChanges, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as d3 from 'd3';
 
@@ -14,7 +14,7 @@ interface ChartDataPoint {
   standalone: true,
   imports: [CommonModule]
 })
-export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ChartComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() chartKey!: string;
   @Input() data: ChartDataPoint[] = [];
   chartTitle = '';
@@ -25,68 +25,6 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   private width = 460 - this.margin.left - this.margin.right;
   private height = 400 - this.margin.top - this.margin.bottom;
   private resizeObserver: ResizeObserver | null = null;
-  
-  // Hardcoded chart data
-  private mockData: { [key: string]: ChartDataPoint[] } = {
-    'battery-capacity': [
-      { x: 'Jan', y: 95 },
-      { x: 'Feb', y: 92 },
-      { x: 'Mar', y: 90 },
-      { x: 'Apr', y: 87 },
-      { x: 'May', y: 85 },
-      { x: 'Jun', y: 83 },
-      { x: 'Jul', y: 80 }
-    ],
-    'cycle-life': [
-      { x: 'Jan', y: 95 },
-      { x: 'Feb', y: 92 },
-      { x: 'Mar', y: 90 },
-      { x: 'Apr', y: 87 },
-      { x: 'May', y: 85 },
-      { x: 'Jun', y: 83 },
-      { x: 'Jul', y: 80 }
-    ],
-    'charging-time': [
-      { x: '0%', y: 0 },
-      { x: '20%', y: 10 },
-      { x: '40%', y: 18 },
-      { x: '60%', y: 25 },
-      { x: '80%', y: 35 },
-      { x: '100%', y: 45 }
-    ],
-    'energy-usage': [
-      { x: 'Mon', y: 45 },
-      { x: 'Tue', y: 38 },
-      { x: 'Wed', y: 42 },
-      { x: 'Thu', y: 35 },
-      { x: 'Fri', y: 50 },
-      { x: 'Sat', y: 25 },
-      { x: 'Sun', y: 20 }
-    ],
-    'efficiency': [
-      { x: 'City', y: 92 },
-      { x: 'Highway', y: 86 },
-      { x: 'Combined', y: 89 }
-    ],
-    'energy-distribution': [
-      { x: 'Solar', y: 45 },
-      { x: 'Wind', y: 25 },
-      { x: 'Hydro', y: 15 },
-      { x: 'Geothermal', y: 10 },
-      { x: 'Biomass', y: 5 }
-    ],
-    'carbon-savings': [
-      { x: 'Q1', y: 120 },
-      { x: 'Q2', y: 150 },
-      { x: 'Q3', y: 180 },
-      { x: 'Q4', y: 210 }
-    ],
-    'cost-comparison': [
-      { x: 'Gasoline', y: 0.15 },
-      { x: 'EV (Grid)', y: 0.05 },
-      { x: 'EV (Solar)', y: 0.02 }
-    ]
-  };
 
   ngOnInit(): void {
     // Set chart title based on chart key
@@ -96,31 +34,29 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
         this.chartTitle = 'Battery Capacity Over Time';
         break;
       case 'charging-time':
-        this.chartTitle = 'Charging Time by Battery Level';
+        this.chartTitle = 'Charge Time Comparison';
         break;
       case 'energy-usage':
         this.chartTitle = 'Daily Energy Usage';
         break;
       case 'efficiency':
-        this.chartTitle = 'Energy Efficiency by Driving Condition';
-        break;
-      case 'energy-distribution':
-        this.chartTitle = '';
-        break;
-      case 'carbon-savings':
-        this.chartTitle = 'Carbon Savings by Quarter';
+        this.chartTitle = 'Energy Efficiency';
         break;
       case 'cost-comparison':
-        this.chartTitle = 'Cost per Mile Comparison';
+        this.chartTitle = 'Cost Per Mile Comparison';
+        break;
+      case 'energy-distribution':
+        this.chartTitle = 'Energy Sources & Distribution';
         break;
       default:
         this.chartTitle = this.chartKey.split('-').map(word => 
           word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
 
-    // Use provided data or fallback to mock data
+    // Only proceed if we have data
     if (!this.data || this.data.length === 0) {
-      this.data = this.mockData[this.chartKey] || [];
+      console.warn(`No data provided for chart: ${this.chartKey}`);
+      return;
     }
     // Create chart after data is set
     setTimeout(() => this.createChart(), 0);
@@ -147,6 +83,19 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Chart changes detected:', {
+      chartKey: this.chartKey,
+      data: this.data,
+      changes
+    });
+    
+    if ((changes['data'] && !changes['data'].firstChange) || 
+        (changes['chartKey'] && !changes['chartKey'].firstChange)) {
+      this.updateChart();
+    }
+  }
+
   private updateChartDimensions(): void {
     const chartContainer = this.hostElement.nativeElement.querySelector('.chart-container');
     if (!chartContainer) return;
@@ -158,19 +107,52 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
     this.height = containerHeight - this.margin.top - this.margin.bottom;
   }
 
+  private updateChart(): void {
+    console.log('Updating chart:', {
+      chartKey: this.chartKey,
+      data: this.data,
+      element: this.hostElement?.nativeElement
+    });
+
+    if (!this.hostElement?.nativeElement) {
+      console.error('Host element not found');
+      return;
+    }
+
+    this.updateChartDimensions();
+    this.createChart();
+  }
+
   private createChart(): void {
-    if (!this.data || this.data.length === 0) return;
+    if (!this.data || this.data.length === 0) {
+      console.warn(`No data for chart: ${this.chartKey}`);
+      return;
+    }
     
+    // Log data for debugging
+    console.log(`Creating chart ${this.chartKey} with data:`, this.data);
+
     // Clear previous chart
-    d3.select(this.hostElement.nativeElement).select('.chart-container svg').remove();
+    const container = this.hostElement.nativeElement.querySelector('.chart-container');
+    if (!container) {
+      console.error('Chart container not found');
+      return;
+    }
+
+    // Update dimensions based on container
+    this.updateChartDimensions();
+
+    // Remove any existing SVG
+    d3.select(container).selectAll('svg').remove();
     
-    // Create SVG
-    this.svg = d3.select(this.hostElement.nativeElement).select('.chart-container')
+    // Create new SVG with updated dimensions
+    this.svg = d3.select(container)
       .append('svg')
-        .attr('width', this.width + this.margin.left + this.margin.right)
-        .attr('height', this.height + this.margin.top + this.margin.bottom)
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .attr('viewBox', `0 0 ${this.width + this.margin.left + this.margin.right} ${this.height + this.margin.top + this.margin.bottom}`)
       .append('g')
-        .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
+      .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
     
     // Add chart title
     this.svg.append('text')
@@ -183,6 +165,12 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Determine chart type based on chartKey
     switch(this.chartKey) {
+      case 'energy-distribution':
+        this.createPieChart();
+        break;
+      case 'charging-time':
+        this.createLineChart();
+        break;
       case 'efficiency':
         this.createHorizontalBarChart();
         break;
@@ -375,72 +363,82 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   private createPieChart(): void {
+    console.log('Creating pie chart with data:', this.data);
+    
     // Set up pie chart dimensions
     const radius = Math.min(this.width, this.height) / 2;
     
-    // Reposition the SVG group to center the pie chart
-    this.svg.attr('transform', `translate(${this.width / 2 + this.margin.left},${this.height / 2 + this.margin.top})`);
+    // Clear existing content and reposition the SVG group to center the pie chart
+    this.svg.selectAll('*').remove();
+    this.svg.attr('transform', `translate(${this.width / 2},${this.height / 2})`);
     
-    // Set up color scale
+    // Set up color scale with a fixed color scheme
+    const colorScheme = ['#4e79a7', '#f28e2c', '#e15759', '#76b7b2', '#59a14f'];
     const color = d3.scaleOrdinal()
       .domain(this.data.map(d => d.x))
-      .range(d3.schemeCategory10);
+      .range(colorScheme);
     
     // Compute the position of each group on the pie
     const pie = d3.pie<ChartDataPoint>()
+      .sort(null)
       .value(d => d.y);
     
     const data_ready = pie(this.data);
     
-    // Build the pie chart
+    // Build the pie chart with a slightly larger radius
     const arcGenerator = d3.arc<any>()
-      .innerRadius(0)
+      .innerRadius(radius * 0.4) // Make it a donut chart
       .outerRadius(radius * 0.8);
     
-    // Add the arcs
-    this.svg
-      .selectAll('mySlices')
+    // Add the arcs with transitions
+    const paths = this.svg
+      .selectAll('path')
       .data(data_ready)
       .enter()
-      .append('path')
-        .attr('d', arcGenerator)
-        .attr('fill', (d: any) => color(d.data.x) as string)
-        .attr('stroke', 'white')
-        .style('stroke-width', '2px')
-        .style('opacity', 0.7);
+      .append('path');
     
-    // Add the labels
+    paths
+      .attr('d', arcGenerator)
+      .attr('fill', (d: any) => color(d.data.x) as string)
+      .attr('stroke', 'white')
+      .style('stroke-width', '2px')
+      .style('opacity', 0.9)
+      .on('mouseover', function(this: SVGPathElement) {
+        d3.select(this).style('opacity', 1);
+      })
+      .on('mouseout', function(this: SVGPathElement) {
+        d3.select(this).style('opacity', 0.9);
+      });
+    
+    // Add the labels with better positioning
     const labelArc = d3.arc<any>()
-      .innerRadius(radius * 0.5)
-      .outerRadius(radius * 0.8);
+      .innerRadius(radius * 0.6)
+      .outerRadius(radius * 0.6);
     
-    this.svg
-      .selectAll('myLabels')
+    const labels = this.svg
+      .selectAll('.label')
       .data(data_ready)
       .enter()
       .append('text')
-        .text((d: any) => d.data.x)
-        .attr('transform', (d: any) => `translate(${labelArc.centroid(d)})`)
-        .style('text-anchor', 'middle')
-        .style('font-size', '12px')
-        .style('fill', 'white');
+      .attr('class', 'label');
     
-    // Add percentage labels
-    const percentageArc = d3.arc<any>()
-      .innerRadius(radius * 0.9)
-      .outerRadius(radius * 0.9);
+    labels
+      .attr('transform', (d: any) => `translate(${labelArc.centroid(d)})`)
+      .attr('dy', '0.35em')
+      .style('text-anchor', 'middle')
+      .style('font-size', '12px')
+      .style('fill', '#333')
+      .style('font-weight', 'bold')
+      .text((d: any) => `${d.data.x}\n${Math.round((d.data.y / d3.sum(this.data, d => d.y)) * 100)}%`);
     
-    const total = d3.sum(this.data, d => d.y);
-    
-    this.svg
-      .selectAll('myPercentages')
-      .data(data_ready)
-      .enter()
-      .append('text')
-        .text((d: any) => `${Math.round((d.data.y / total) * 100)}%`)
-        .attr('transform', (d: any) => `translate(${percentageArc.centroid(d)})`)
-        .style('text-anchor', 'middle')
-        .style('font-size', '10px');
+    // Add a title
+    this.svg.append('text')
+      .attr('x', 0)
+      .attr('y', -radius - 20)
+      .attr('text-anchor', 'middle')
+      .style('font-size', '16px')
+      .style('font-weight', 'bold')
+      .text(this.chartTitle);
   }
   
   private getYAxisLabel(): string {
@@ -449,13 +447,15 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'cycle-life':
         return 'Capacity (%)';
       case 'charging-time':
-        return 'Time (min)';
+        return 'Time (minutes)';
       case 'energy-usage':
         return 'Energy (kWh)';
       case 'efficiency':
         return 'Efficiency (%)';
+      case 'cost-comparison':
+        return 'Cost ($/mile)';
       case 'energy-distribution':
-        return 'Energy Distribution';
+        return 'Percentage (%)';
       default:
         return 'Value';
     }

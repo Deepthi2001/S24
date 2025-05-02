@@ -3,13 +3,13 @@
   
   <div class="chart-section">
     <h2>Energy Sources & Distribution</h2>
-    <app-chart [chartKey]="'energy-distribution'"></app-chart>
+    <app-chart [chartKey]="'energy-distribution'" [data]="summaryData?.energyDistribution || []"></app-chart>
     <p class="chart-description">This chart illustrates the distribution of clean energy sources used for EV charging in our network. Solar energy leads at 45%, followed by wind at 25%, hydroelectric at 15%, geothermal at 10%, and biomass at 5%. This diverse mix of renewable sources ensures reliability while maximizing environmental benefits. Data is collected from our network of charging stations and updated monthly.</p>
   </div>
   
   <div class="chart-section">
     <h2>Charge Time Comparison</h2>
-    <app-chart [chartKey]="'charging-time'"></app-chart>
+    <app-chart [chartKey]="'charging-time'" [data]="summaryData?.chargingTime || []"></app-chart>
     <p class="chart-description">The chart above illustrates the charging time required to reach different battery levels. Using the latest nano-tin composite anode technology, EVs can reach 80% charge in just 35 minutes, compared to 60+ minutes with older battery technologies. This data is based on measurements from our fast-charging network and represents average charging times across different EV models.</p>
   </div>
   

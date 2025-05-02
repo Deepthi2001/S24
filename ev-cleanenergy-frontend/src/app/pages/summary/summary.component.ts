@@ -31,7 +31,19 @@ export class SummaryComponent implements OnInit {
     
     this.summaryService.getSummaryData().subscribe({
       next: (data) => {
-        this.summaryData = data;
+        // Transform data for charts
+        this.summaryData = {
+          ...data,
+          energyDistribution: data.energyDistribution?.map(item => ({
+            x: item.x,
+            y: Number(item.y)
+          })) || [],
+          chargingTime: data.chargingTime?.map(item => ({
+            x: item.x,
+            y: Number(item.y)
+          })) || []
+        };
+        console.log('Transformed summary data:', this.summaryData);
         this.loading = false;
       },
       error: (err) => {
