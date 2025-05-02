@@ -12,7 +12,8 @@ app.use(express.json());
 
 const path = require('path');
 require('dotenv').config();
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI_SAMPLE = "mongodb+srv://saideepthi2001:Mongodb1@evchargers.5aqwwgv.mongodb.net/"
+const MONGO_URI = process.env.MONGO_URI || MONGO_URI_SAMPLE;
 // MongoDB connection
 mongoose.connect(MONGO_URI , {
   useNewUrlParser: true,
@@ -31,7 +32,6 @@ mongoose.connect(MONGO_URI , {
 
 // routes
 app.use('/api/auth', authRoute);
-app.use('/api/chart', chartRoute);
 app.use('/api/summary', summaryRoute);
 app.use('/api/reports', reportsRoute);
 
