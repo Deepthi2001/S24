@@ -15,22 +15,76 @@ async function seed() {
   await ChartData.deleteMany({});
   console.log('🗑  Cleared existing ChartData');
 
-  // our two datasets
+  // All chart datasets for the application
   const charts = [
     {
-      key: 'charge-time',
+      key: 'charging-time',
       data: [
-        { x: 'Standard Graphite', y: 60 },
-        { x: 'Hard-C/Sn Nano',    y: 20 },
+        { x: '0%', y: 0 },
+        { x: '20%', y: 10 },
+        { x: '40%', y: 18 },
+        { x: '60%', y: 25 },
+        { x: '80%', y: 35 },
+        { x: '100%', y: 45 }
       ],
     },
     {
       key: 'cycle-life',
       data: [
-        { x:   0, graphite: 100, composite: 100 },
-        { x: 500, graphite:  90, composite:  98 },
-        { x:1000, graphite:  80, composite:  95 },
-        { x:1500, graphite:  70, composite:  92 },
+        { x: 'Jan', y: 95 },
+        { x: 'Feb', y: 92 },
+        { x: 'Mar', y: 90 },
+        { x: 'Apr', y: 87 },
+        { x: 'May', y: 85 },
+        { x: 'Jun', y: 83 },
+        { x: 'Jul', y: 80 }
+      ],
+    },
+    {
+      key: 'energy-usage',
+      data: [
+        { x: 'Mon', y: 45 },
+        { x: 'Tue', y: 38 },
+        { x: 'Wed', y: 42 },
+        { x: 'Thu', y: 35 },
+        { x: 'Fri', y: 50 },
+        { x: 'Sat', y: 25 },
+        { x: 'Sun', y: 20 }
+      ],
+    },
+    {
+      key: 'efficiency',
+      data: [
+        { x: 'City', y: 92 },
+        { x: 'Highway', y: 86 },
+        { x: 'Combined', y: 89 }
+      ],
+    },
+    {
+      key: 'energy-distribution',
+      data: [
+        { x: 'Solar', y: 45 },
+        { x: 'Wind', y: 25 },
+        { x: 'Hydro', y: 15 },
+        { x: 'Geothermal', y: 10 },
+        { x: 'Biomass', y: 5 }
+      ],
+    },
+    {
+      key: 'carbon-savings',
+      data: [
+        { x: 'Q1', y: 120 },
+        { x: 'Q2', y: 150 },
+        { x: 'Q3', y: 180 },
+        { x: 'Q4', y: 210 }
+      ],
+    },
+    {
+      key: 'cost-comparison',
+      data: [
+        { x: 'Gasoline', y: 0.15 },
+        { x: 'EV (Grid)', y: 0.05 },
+        { x: 'EV (Solar)', y: 0.02 }
       ],
     },
   ];

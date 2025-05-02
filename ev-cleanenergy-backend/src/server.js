@@ -3,6 +3,8 @@ const mongoose  = require('mongoose');
 const cors      = require('cors');
 const authRoute = require('./routes/auth');
 const chartRoute= require('./routes/chart');
+const summaryRoute = require('./routes/summary');
+const reportsRoute = require('./routes/reports');
 
 const app = express();
 app.use(cors());
@@ -19,6 +21,8 @@ mongoose.connect('mongodb://localhost:27017/evCleanEnergy', {
 // routes
 app.use('/api/auth', authRoute);
 app.use('/api/chart', chartRoute);
+app.use('/api/summary', summaryRoute);
+app.use('/api/reports', reportsRoute);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
