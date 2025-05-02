@@ -16,7 +16,7 @@ interface ChartDataPoint {
 })
 export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() chartKey!: string;
-  data: ChartDataPoint[] = [];
+  @Input() data: ChartDataPoint[] = [];
   chartTitle = '';
   
   private hostElement: ElementRef = inject(ElementRef);
@@ -28,6 +28,15 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   
   // Hardcoded chart data
   private mockData: { [key: string]: ChartDataPoint[] } = {
+    'battery-capacity': [
+      { x: 'Jan', y: 95 },
+      { x: 'Feb', y: 92 },
+      { x: 'Mar', y: 90 },
+      { x: 'Apr', y: 87 },
+      { x: 'May', y: 85 },
+      { x: 'Jun', y: 83 },
+      { x: 'Jul', y: 80 }
+    ],
     'cycle-life': [
       { x: 'Jan', y: 95 },
       { x: 'Feb', y: 92 },
@@ -82,6 +91,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     // Set chart title based on chart key
     switch(this.chartKey) {
+      case 'battery-capacity':
       case 'cycle-life':
         this.chartTitle = 'Battery Capacity Over Time';
         break;
@@ -108,8 +118,10 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
           word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
 
-    // Get data from hardcoded values
-    this.data = this.mockData[this.chartKey] || [];
+    // Use provided data or fallback to mock data
+    if (!this.data || this.data.length === 0) {
+      this.data = this.mockData[this.chartKey] || [];
+    }
     // Create chart after data is set
     setTimeout(() => this.createChart(), 0);
   }
@@ -433,6 +445,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   
   private getYAxisLabel(): string {
     switch(this.chartKey) {
+      case 'battery-capacity':
       case 'cycle-life':
         return 'Capacity (%)';
       case 'charging-time':

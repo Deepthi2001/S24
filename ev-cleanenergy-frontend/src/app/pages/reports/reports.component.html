@@ -1,27 +1,37 @@
 <div class="reports-container">
   <h1>Performance Analytics Reports</h1>
-  
-  <div class="chart-section">
-    <h2>Battery Capacity Over Time</h2>
-    <app-chart [chartKey]="'cycle-life'"></app-chart>
-    <p class="chart-description">This chart tracks battery capacity retention over time. The data shows a gradual decline from 95% in January to 80% in July, which is significantly better than industry standards. Most EV batteries typically degrade to 70% capacity after similar usage periods. This data is collected from our fleet of monitored vehicles and represents average values across different battery technologies.</p>
+
+  <div *ngIf="loading" class="loading-state">
+    <p>Loading reports data...</p>
   </div>
-  
-  <div class="chart-section">
-    <h2>Daily Energy Usage</h2>
-    <app-chart [chartKey]="'energy-usage'"></app-chart>
-    <p class="chart-description">This chart displays the average daily energy consumption of EVs in our network. Usage peaks on Fridays (50 kWh) and is lowest on weekends (20-25 kWh), reflecting typical commuting patterns. The data is collected from charging sessions and helps optimize charging infrastructure deployment and energy distribution planning.</p>
+
+  <div *ngIf="error" class="error-state">
+    <p>Error loading reports data. Please try again later.</p>
   </div>
-  
-  <div class="chart-section">
-    <h2>Energy Efficiency by Driving Condition</h2>
-    <app-chart [chartKey]="'efficiency'"></app-chart>
-    <p class="chart-description">This chart compares energy efficiency across different driving conditions. City driving achieves the highest efficiency (92%) due to regenerative braking opportunities, while highway driving is slightly less efficient (86%). The combined average efficiency of 89% demonstrates the overall effectiveness of modern EV powertrains compared to internal combustion engines which typically operate at 20-30% efficiency.</p>
-  </div>
-  
-  <div class="chart-section">
-    <h2>Cost per Mile Comparison</h2>
-    <app-chart [chartKey]="'cost-comparison'"></app-chart>
-    <p class="chart-description">This chart compares the cost per mile of different vehicle power sources. Gasoline vehicles cost approximately $0.15 per mile, while grid-charged EVs cost only $0.05 per mile. Solar-charged EVs achieve the lowest cost at just $0.02 per mile, representing a 87% cost reduction compared to gasoline vehicles. These figures are based on current energy prices and average vehicle efficiencies.</p>
+
+  <div *ngIf="!loading && !error && reportsData">
+    <div class="chart-section">
+      <h2>Battery Capacity Over Time</h2>
+      <app-chart [chartKey]="'battery-capacity'" [data]="reportsData.batteryCapacity"></app-chart>
+      <p class="chart-description">{{reportsData.descriptions.batteryCapacity}}</p>
+    </div>
+    
+    <div class="chart-section">
+      <h2>Daily Energy Usage</h2>
+      <app-chart [chartKey]="'energy-usage'" [data]="reportsData.energyUsage"></app-chart>
+      <p class="chart-description">{{reportsData.descriptions.energyUsage}}</p>
+    </div>
+    
+    <div class="chart-section">
+      <h2>Energy Efficiency by Driving Condition</h2>
+      <app-chart [chartKey]="'efficiency'" [data]="reportsData.efficiency"></app-chart>
+      <p class="chart-description">{{reportsData.descriptions.efficiency}}</p>
+    </div>
+    
+    <div class="chart-section">
+      <h2>Cost per Mile Comparison</h2>
+      <app-chart [chartKey]="'cost-comparison'" [data]="reportsData.costComparison"></app-chart>
+      <p class="chart-description">{{reportsData.descriptions.costComparison}}</p>
+    </div>
   </div>
 </div>
