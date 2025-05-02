@@ -17,13 +17,13 @@
   max-width: 1400px;
   margin: 0 auto;
   box-sizing: border-box;
-  padding-top: 60px; /* Match the navbar height */
+  padding-top: 30px;
 }
 
 // Fix for login page
 :host ::ng-deep .login-container {
   min-height: 100vh;
-  padding-top: 0; /* Override padding for login page */
+  padding-top: 0; 
 }
 
 // Fix for dashboard page

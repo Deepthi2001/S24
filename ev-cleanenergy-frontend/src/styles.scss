@@ -84,7 +84,13 @@ body {
 
 /* Card styles */
 .card {
-  background-color: var(--background-card);
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  background-color: #6c7cd7;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   padding: 1.5rem;
@@ -133,7 +139,7 @@ body {
 /* Chart container */
 .chart-container {
   width: 100%;
-  height: 400px;
+  height: 500px;
   margin: 1.5rem 0;
 }
 
