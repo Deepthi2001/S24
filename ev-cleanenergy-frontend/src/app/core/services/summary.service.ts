@@ -24,7 +24,7 @@ export interface SummaryData {
   providedIn: 'root'
 })
 export class SummaryService {
-  private apiUrl = 'http://localhost:3000/api/summary';
+  private apiUrl = 'http://ev-clean-energy.us-east-2.elasticbeanstalk.com/api/summary';
   private http = inject(HttpClient);
   private authService = inject(AuthService);
   

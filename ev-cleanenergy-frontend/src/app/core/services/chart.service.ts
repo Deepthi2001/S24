@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChartService {
-  private apiUrl = 'http://localhost:3000/api/chart';
+  private apiUrl = 'http://ev-clean-energy.us-east-2.elasticbeanstalk.com/api/chart';
   private platformId = inject(PLATFORM_ID);
   private http = inject(HttpClient);
   private authService = inject(AuthService);

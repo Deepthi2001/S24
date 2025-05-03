@@ -12,7 +12,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'http://ev-clean-energy.us-east-2.elasticbeanstalk.com/api/auth';
   private platformId = inject(PLATFORM_ID);
   private http = inject(HttpClient);
   

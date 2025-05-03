@@ -20,7 +20,7 @@ export interface ReportsData {
   providedIn: 'root'
 })
 export class ReportsService {
-  private apiUrl = 'http://localhost:3000/api/reports';
+  private apiUrl = 'http://ev-clean-energy.us-east-2.elasticbeanstalk.com/api/reports';
   private http = inject(HttpClient);
   private authService = inject(AuthService);
   
