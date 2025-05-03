@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const Chart = require('../models/ChartData');
-const auth = require('../middleware/auth');
+const Chart = require('../../models/ChartData');
+const auth = require('../../middleware/auth');
 
 // GET /api/reports
 // Returns all data needed for the reports page
